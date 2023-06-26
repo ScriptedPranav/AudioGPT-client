@@ -1,5 +1,6 @@
 # AudioGPT-client
 <p>Your personal GPT-powered AI assistance</p>
+- [Click here] (https://audio-gpt-client.vercel.app/)
 
 ## Preview
 ![image](https://github.com/ScriptedPranav/AudioGPT-client/assets/86917061/71569ff5-e992-4b10-8f4c-27d6c19c608d)
