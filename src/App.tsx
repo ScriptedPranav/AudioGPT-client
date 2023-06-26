@@ -1,8 +1,6 @@
-import { Box, Button, Center, Textarea, useColorMode, Spinner ,Text} from "@chakra-ui/react";
+import { Box, Button, Center, Textarea, useColorMode, Spinner, Text } from "@chakra-ui/react";
 import { BsMoon, BsSun } from "react-icons/bs";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import url from './utils/axiosUrl';
@@ -21,7 +19,7 @@ function App() {
   const transcriptRef = useRef("");
   const isTranscriptChangedRef = useRef(false);
 
-  const processVoiceInput = async (input:string) => {
+  const processVoiceInput = async (input: string) => {
     try {
       const response = await axios.post(url, {
         input: input,
@@ -67,30 +65,69 @@ function App() {
   }
 
   return (
-    <Center height="100vh">
+    <Center height="100vh" bg={colorMode === "light" ? "gray.200" : "gray.900"}>
       <Box
-        bg={colorMode === "light" ? "gray.100" : "gray.800"}
-        p={4}
+        maxW="md"
+        p={8}
         borderRadius="md"
+        boxShadow="lg"
+        bg={colorMode === "light" ? "white" : "gray.700"}
       >
+        <Box
+          bgGradient="linear(to-r, blue.400, purple.500)"
+          bgClip="text"
+          fontSize="2xl"
+          fontWeight="semibold"
+          textAlign="center"
+          mb={4}
+        >
+          GPT-Powered Audio-BOT
+        </Box>
+        <Text fontSize="md" textAlign="center" mb={4} color={colorMode === "light" ? "gray.500" : "gray.400"}>
+          Speak your query and get an audio response
+        </Text>
         <Textarea
           placeholder="Speak your query..."
           value={transcript}
-          bg={colorMode === "light" ? "white" : "gray.700"}
           resize="none"
           mb={4}
           readOnly
+          minHeight="10rem"
+          borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
+          _hover={{ borderColor: colorMode === "light" ? "gray.400" : "gray.500" }}
+          _focus={{ borderColor: colorMode === "light" ? "blue.500" : "blue.300" }}
+          borderRadius="md"
+          bg={colorMode === "light" ? "white" : "gray.600"}
+          color={colorMode === "light" ? "gray.800" : "white"}
         />
-        <Button onClick={handleButtonClick}>
+        <Button
+          onClick={handleButtonClick}
+          colorScheme={colorMode === "light" ? "blue" : "teal"}
+          size="md"
+          fontWeight="semibold"
+        >
           {listening ? "Stop" : "Start"}
         </Button>
-        <Button onClick={toggleColorMode} ml={2}>
+        <Button
+          onClick={toggleColorMode}
+          ml={2}
+          colorScheme={colorMode === "light" ? "blue" : "teal"}
+          size="md"
+          fontWeight="semibold"
+        >
           {colorMode === "light" ? <BsMoon /> : <BsSun />}
         </Button>
         {audioUrl ? (
-          <audio src={audioUrl} controls />
+          <audio src={audioUrl} controls style={{ marginTop: "1rem" }} />
         ) : (
-          <p>Press <Text as = 'mark'>start</Text> to get the response audio</p>
+          <Text fontSize="sm" textAlign="center" color={colorMode === "light" ? "gray.500" : "gray.400"}>
+            Press Start to get the response audio
+          </Text>
+        )}
+        {loading && (
+          <Center mt={4}>
+            <Spinner size="sm" color={colorMode === "light" ? "blue.500" : "teal.300"} />
+          </Center>
         )}
       </Box>
     </Center>
