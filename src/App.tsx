@@ -26,15 +26,16 @@ function App() {
       });
       const data = await response?.data;
       setAudioUrl(data.audioUrl);
+      setLoading(false);
     } catch (error) {
       console.error("Error processing voice input", error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (!listening && isTranscriptChangedRef.current) {
       processVoiceInput(transcriptRef.current);
-      setLoading(false);
       isTranscriptChangedRef.current = false;
     }
   }, [listening]);
