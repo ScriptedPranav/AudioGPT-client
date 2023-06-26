@@ -9,4 +9,5 @@
 - git clone the repository
 - Go to `src/utils/axiosUrl.ts`
 - Set `url = <YOUR_API_URL>`
+- `npm install` or `yarn`
 - `npm run dev`
