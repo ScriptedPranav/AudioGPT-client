@@ -1,4 +1,4 @@
-const url = "https://audiogpt-uhfc.onrender.com/api/bot";
+const url = "https://audiogpt-3i9f.onrender.com";
 // const url = "http://localhost:3000/api/bot"
 
 export default url;
